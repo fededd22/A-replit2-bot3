@@ -1,0 +1,16 @@
+run = "npm install && npm run dev"
+entrypoint = "server.ts"
+modules = ["nodejs-22"]
+
+[nix]
+channel = "stable-24_05"
+packages = ["curl", "unzip"]
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[deployment]
+run = ["sh", "-c", "npm run build && npm start"]
+deploymentTarget = "gce"
+build = ["sh", "-c", "npm install"]
